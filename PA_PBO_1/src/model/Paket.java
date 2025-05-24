@@ -29,4 +29,11 @@ public class Paket {
     public double getHarga() {
         return harga;
     }
+
+    public void getPaket() {
+        System.out.println("ID Paket: " + ID_Paket);
+        System.out.println("Nama Paket: " + nama);
+        System.out.println("Deskripsi: " + deskripsi);
+        System.out.println("Harga: " + harga);
+    }
 }

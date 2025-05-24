@@ -1,12 +1,9 @@
 package model;
 
-import java.util.ArrayList;
-
-public class Pelanggan extends User implements ReservasiInterface {
+public class Pelanggan extends User {
     private static int idCounter = 1;
     private final int ID_Pelanggan;
     private String noTelp;
-    private ArrayList<Reservasi> reservasiList = new ArrayList<>();
 
     public Pelanggan(String username, String password, String noTelp) {
         super(username, password);
@@ -19,26 +16,26 @@ public class Pelanggan extends User implements ReservasiInterface {
         return this.username.equals(username) && this.password.equals(password);
     }
 
-    public void buatReservasi(Reservasi reservasi) {
-        reservasiList.add(reservasi);
-        System.out.println(util.BLUE + "====================================================");
-        System.out.println(util.GREEN +"            RESERVASI BERHASIL DIBUAT!              ");
-        System.out.println(util.BLUE + "====================================================");
-    }
+    // public void buatReservasi(Reservasi reservasi) {
+    //     reservasiList.add(reservasi);
+    //     System.out.println(util.BLUE + "====================================================");
+    //     System.out.println(util.GREEN +"            RESERVASI BERHASIL DIBUAT!              ");
+    //     System.out.println(util.BLUE + "====================================================");
+    // }
 
-    @Override
-    public void detailReservasi() {
-        if (reservasiList.isEmpty()) {
-            System.out.println("Belum ada reservasi.");
-            System.out.println(util.BLUE + "====================================================");
-            System.out.println(util.GREEN +"               BELUM ADA RESERVASI!                ");
-            System.out.println(util.BLUE + "====================================================");
-        } else {
-            for (Reservasi r : reservasiList) {
-                r.detailReservasi();
-            }
-        }
-    }
+    // @Override
+    // public void detailReservasi() {
+    //     if (reservasiList.isEmpty()) {
+    //         System.out.println("Belum ada reservasi.");
+    //         System.out.println(util.BLUE + "====================================================");
+    //         System.out.println(util.GREEN +"               BELUM ADA RESERVASI!                ");
+    //         System.out.println(util.BLUE + "====================================================");
+    //     } else {
+    //         for (Reservasi r : reservasiList) {
+    //             r.detailReservasi();
+    //         }
+    //     }
+    // }
 
     public int getIDPelanggan() {
         return ID_Pelanggan;
@@ -48,7 +45,7 @@ public class Pelanggan extends User implements ReservasiInterface {
         return noTelp;
     }
 
-    public ArrayList<Reservasi> getReservasiList() {
-        return reservasiList;
-    }
+    // public ArrayList<Reservasi> getReservasiList() {
+    //     return reservasiList;
+    // }
 }
