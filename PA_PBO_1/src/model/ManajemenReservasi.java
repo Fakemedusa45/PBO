@@ -18,33 +18,91 @@ public class ManajemenReservasi implements ManajemenReservasiInterface {
     }
 
     public void getAllReservasi() {
+
         if (reservasiList.isEmpty()) {
-            System.out.println("Tidak ada reservasi yang tersedia.");
+            System.out.println(util.GREEN + "====================================================");
+            System.out.println(util.RED + "                TIDAK ADA RESERVASI!                ");
+            System.out.println(util.GREEN + "====================================================");
         } else {
-            System.out.println("Daftar Reservasi:");
+            System.out.println(util.BLUE
+                    + "+---------+-----------------+----------------+------------------+-----------------+----------+----------------+");
+            System.out.println(util.BLUE + "|" + util.GREEN + " ID      " + util.BLUE + "|" + util.GREEN
+                    + " Barber          " + util.BLUE + "|" + util.GREEN + " Pelanggan      " + util.BLUE + "|"
+                    + util.GREEN + " Waktu Mulai     " + util.BLUE + "|" + util.GREEN + " Paket          " + util.BLUE
+                    + "|" + util.GREEN + " Harga    " + util.BLUE + "|" + util.GREEN + " Status         " + util.BLUE
+                    + "|");
+            System.out.println(util.BLUE
+                    + "+---------+-----------------+----------------+------------------+-----------------+----------+----------------+");
             for (Reservasi r : reservasiList) {
-                System.out.println("ID Reservasi: " + r.getIDReservasi() + ", Waktu Mulai: " + r.getWaktuMulai());
+                String namaBarber = (r.getBarber() != null) ? r.getBarber().username : "Belum dipilih";
+                String statusReservasi = r.isStatus() ? "Pesanan Selesai" : "Belum Cukur";
+                String namaPelanggan = (r.getPelanggan() != null) ? r.getPelanggan().getUsername() : "Tidak ada";
+                System.out.printf(util.GREEN + "| %-7d | %-15s | %-14s | %-16s | %-15s | %-8d | %-14s |%n",
+                        r.getIDReservasi(),
+                        namaBarber,
+                        namaPelanggan,
+                        r.getWaktuMulai(),
+                        r.getPaket().getNama(),
+                        r.getPaket().getHarga(),
+                        statusReservasi);
             }
+            System.out.println(util.BLUE
+                    + "+---------+-----------------+----------------+------------------+-----------------+----------+----------------+");
         }
     }
 
     public void getReservasiByBarber(Barber barber) {
+        System.out.println(util.BLUE
+                + "+---------+----------------+------------------+-----------------+----------+----------------+");
+        System.out.println(util.BLUE + "|" + util.GREEN + " ID      " + util.BLUE + "|" + util.GREEN
+                + " Pelanggan      " + util.BLUE + "|" + util.GREEN + " Waktu Mulai     " + util.BLUE + "|" + util.GREEN
+                + " Paket          " + util.BLUE + "|" + util.GREEN + " Harga    " + util.BLUE + "|" + util.GREEN
+                + " Status         " + util.BLUE + "|");
+        System.out.println(util.BLUE
+                + "+---------+----------------+------------------+-----------------+----------+----------------+");
         System.out.println("Reservasi untuk Barber " + barber.getUsername() + ":");
         for (Reservasi r : reservasiList) {
             if (r.getBarber().equals(barber) && !r.isStatus()) {
-                System.out.println("ID Reservasi: " + r.getIDReservasi() + ", Waktu Mulai: " + r.getWaktuMulai() + r.getPaket().getNama());
+                String statusReservasi = r.isStatus() ? "Pesanan Selesai" : "Belum Cukur";
+                String namaPelanggan = (r.getPelanggan() != null) ? r.getPelanggan().getUsername() : "Tidak ada";
+                System.out.printf(util.GREEN + "| %-7d | %-14s | %-16s | %-15s | %-8d | %-14s |%n",
+                        r.getIDReservasi(),
+                        namaPelanggan,
+                        r.getWaktuMulai(),
+                        r.getPaket().getNama(),
+                        r.getPaket().getHarga(),
+                        statusReservasi);
             }
         }
+        System.out.println(util.BLUE
+                + "+---------+----------------+------------------+-----------------+----------+----------------+");
     }
 
     public void getReservasiByPelanggan(Pelanggan pelanggan) {
         System.out.println("Reservasi untuk Pelanggan " + pelanggan.getUsername() + ":");
+        System.out.println(util.BLUE
+                + "+---------+-----------------+------------------+-----------------+----------+----------------+");
+        System.out.println(util.BLUE + "|" + util.GREEN + " ID      " + util.BLUE + "|" + util.GREEN
+                + " Barber          " + util.BLUE + "|" + util.GREEN + " Waktu Mulai     " + util.BLUE + "|"
+                + util.GREEN + " Paket          " + util.BLUE + "|" + util.GREEN + " Harga    " + util.BLUE + "|"
+                + util.GREEN + "Status         " + util.BLUE + "|");
+        System.out.println(util.BLUE
+                + "+---------+-----------------+------------------+-----------------+----------+----------------+");
         for (Reservasi r : reservasiList) {
             if (r.getPelanggan().equals(pelanggan)) {
-                System.out.println(
-                        "ID Reservasi: " + r.getIDReservasi() + ", Waktu Mulai: " + r.getWaktuMulai() + r.getPaket());
+                String namaBarber = (r.getBarber() != null) ? r.getBarber().username : "Belum dipilih";
+                String statusReservasi = r.isStatus() ? "Pesanan Selesai" : "Belum Cukur";
+                System.out.printf(util.GREEN + "| %-7d | %-15s | %-16s | %-15s | %-8d | %-14s |%n",
+                        r.getIDReservasi(),
+                        namaBarber,
+                        r.getWaktuMulai(),
+                        r.getPaket().getNama(),
+                        r.getPaket().getHarga(),
+                        statusReservasi);
             }
         }
+        System.out.println(util.BLUE
+                + "+---------+-----------------+------------------+-----------------+----------+----------------+");
     }
 
     public void selesaikanReservasiByBarber(Barber barber, int id) {

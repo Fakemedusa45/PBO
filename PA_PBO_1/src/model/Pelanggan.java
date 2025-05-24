@@ -16,27 +16,6 @@ public class Pelanggan extends User {
         return this.username.equals(username) && this.password.equals(password);
     }
 
-    // public void buatReservasi(Reservasi reservasi) {
-    //     reservasiList.add(reservasi);
-    //     System.out.println(util.BLUE + "====================================================");
-    //     System.out.println(util.GREEN +"            RESERVASI BERHASIL DIBUAT!              ");
-    //     System.out.println(util.BLUE + "====================================================");
-    // }
-
-    // @Override
-    // public void detailReservasi() {
-    //     if (reservasiList.isEmpty()) {
-    //         System.out.println("Belum ada reservasi.");
-    //         System.out.println(util.BLUE + "====================================================");
-    //         System.out.println(util.GREEN +"               BELUM ADA RESERVASI!                ");
-    //         System.out.println(util.BLUE + "====================================================");
-    //     } else {
-    //         for (Reservasi r : reservasiList) {
-    //             r.detailReservasi();
-    //         }
-    //     }
-    // }
-
     public int getIDPelanggan() {
         return ID_Pelanggan;
     }
@@ -44,8 +23,4 @@ public class Pelanggan extends User {
     public String getNoTelp() {
         return noTelp;
     }
-
-    // public ArrayList<Reservasi> getReservasiList() {
-    //     return reservasiList;
-    // }
 }

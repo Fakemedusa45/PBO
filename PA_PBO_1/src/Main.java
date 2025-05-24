@@ -8,7 +8,6 @@ public class Main {
     static ArrayList<Pelanggan> pelangganList = new ArrayList<>();
     static ArrayList<Barber> barberList = new ArrayList<>();
     static ArrayList<Admin> adminList = new ArrayList<>();
-    static ArrayList<Cabang> cabangList = new ArrayList<>();
     static ArrayList<Paket> paketList = new ArrayList<>();
     // protected ArrayList<Reservasi> reservasiList = new ArrayList<>();
     static ManajemenReservasi manajemenReservasi = new ManajemenReservasi();
@@ -22,11 +21,6 @@ public class Main {
         barberList.add(new Barber("barber", "barber"));
         barberList.add(new Barber("barber2", "barber2"));
         barberList.add(new Barber("barber3", "barber3"));
-
-        // Data default cabang (3 data)
-        cabangList.add(new Cabang("Cabang A", "Jl. Mawar No.1"));
-        cabangList.add(new Cabang("Cabang B", "Jl. Melati No.2"));
-        cabangList.add(new Cabang("Cabang C", "Jl. Kenanga No.3"));
 
         paketList.add(new Paket("Paket A", "cukur A", 50000));
         paketList.add(new Paket("Paket B", "cukur B", 60000));
@@ -181,7 +175,7 @@ public class Main {
             System.out.println("   [2] Lihat Detail Reservasi");
             System.out.println("   [3] Logout");
             System.out.println(
-                    util.BLUE + "\n================================================================================");
+                    util.BLUE + "================================================================================");
             int pilih = inputInteger(util.GREEN + "Pilih Menu : " + util.YELLOW);
 
             switch (pilih) {
@@ -225,7 +219,7 @@ public class Main {
                         // Pilih paket
                         while (true) {
                             System.out.println(util.BLUE + "====================================================");
-                            System.out.println(util.GREEN + "Pilih Paket:");
+                            System.out.println(util.GREEN + "                     PILIH PAKET                    ");
                             System.out.println(util.BLUE + "====================================================");
                             System.out.printf(
                                     util.BLUE + "| " + util.GREEN + "%-3s" + util.BLUE + " | " + util.GREEN + "%-10s"
@@ -294,11 +288,6 @@ public class Main {
                                 System.out.println("====================================================");
                             }
                         }
-
-                        // Buat reservasi
-                        // Reservasi reservasi = new Reservasi(p.getUsername(), tanggalWaktu);
-                        // reservasi.setBarber(barberPilihan);
-                        // p.buatReservasi(reservasi);
                         Reservasi reservasi = new Reservasi(tanggalWaktu, barberPilihan, p, paketPilihan);
 
                         manajemenReservasi.tambahReservasi(reservasi);
@@ -313,7 +302,6 @@ public class Main {
                     }
                     break;
                 case 2:
-                    // p.detailReservasi();
                     manajemenReservasi.getReservasiByPelanggan(p);
                     break;
                 case 3:
@@ -339,101 +327,23 @@ public class Main {
                     ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║
                     ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝""");
             System.out.println(util.BLUE + "====================================================");
-            // System.out.println("1. Lihat Cabang");
-            // System.out.println("2. Tambah Cabang");
-            // System.out.println("3. Update Cabang");
-            // System.out.println(" [4] Hapus Cabang");
-            System.out.println(util.GREEN + "   [5] Lihat Barber");
-            System.out.println("   [6] Tambah Barber");
-            System.out.println("   [7] Update Barber");
-            System.out.println("   [8] Hapus Barber");
-            System.out.println("   [9] Logout");
+            System.out.println(util.GREEN + "   [1] Lihat Reservasi");
+            System.out.println("   [2] Lihat Barber");
+            System.out.println("   [3] Tambah Barber");
+            System.out.println("   [4] Update Barber");
+            System.out.println("   [5] Hapus Barber");
+            System.out.println("   [0] Logout");
             System.out.println(util.BLUE + "====================================================");
 
             int pilih = inputInteger(util.GREEN + "Pilih Menu : " + util.YELLOW);
             switch (pilih) {
                 case 1:
-                    // for (Cabang c : cabangList) {
-                    // System.out.println("ID: " + c.getID() + ", Nama: " + c.getNama() + ",
-                    // Alamat:" + c.getAlamat());
-                    // }
                     manajemenReservasi.getAllReservasi();
                     break;
-                // case 2:
-                // try {
-                // System.out.print(util.GREEN + "Nama Cabang: " + util.YELLOW);
-                // String nama = sc.nextLine();
-                // System.out.print(util.GREEN + "Alamat: " + util.YELLOW);
-                // String alamat = sc.nextLine();
-                // cabangList.add(new Cabang(nama, alamat));
-                // System.out.println(util.BLUE +
-                // "====================================================");
-                // System.out.println(util.GREEN + " CABANG BERHASIL DITAMBAHKAN! ");
-                // System.out.println(util.BLUE +
-                // "====================================================");
-                // util.delay(2000);
-                // util.clearConsole();
-                // } catch (Exception e) {
-                // System.out.println(util.RED +
-                // "====================================================");
-                // System.out.println( " INPUT CABANG GAGAL! ");
-                // System.out.println( "====================================================");
-                // util.delay(2000);
-                // util.clearConsole();
-                // sc.nextLine();
-                // }
-                // break;
-                // case 3:
-                // try {
-                // System.out.print(util.GREEN + "ID Cabang: " + util.YELLOW);
-                // int idU = sc.nextInt(); sc.nextLine();
-                // for (Cabang c : cabangList) {
-                // if (c.getID() == idU) {
-                // System.out.print(util.GREEN + "Nama baru: " + util.YELLOW);
-                // c.setNama(sc.nextLine());
-                // System.out.print(util.GREEN + "Alamat baru: " + util.YELLOW);
-                // c.setAlamat(sc.nextLine());
-                // System.out.println(util.BLUE +
-                // "====================================================");
-                // System.out.println(util.GREEN + " CABANG BERHASIL DIUPDATE! ");
-                // System.out.println(util.BLUE +
-                // "====================================================");
-                // }
-                // }
-                // } catch (Exception e) {
-                // System.out.println(util.RED +
-                // "====================================================");
-                // System.out.println( " INPUT UPDATE CABANG GAGAL! ");
-                // System.out.println( "====================================================");
-                // util.delay(2000);
-                // util.clearConsole();
-                // sc.nextLine();
-                // }
-                // break;
-                // case 4:
-                // try {
-                // System.out.print(util.GREEN + "ID Cabang: " + util.YELLOW);
-                // int idH = sc.nextInt(); sc.nextLine();
-                // cabangList.removeIf(c -> c.getID() == idH);
-                // System.out.println(util.BLUE +
-                // "====================================================");
-                // System.out.println(util.GREEN + " CABANG BERHASIL DIHAPUS! ");
-                // System.out.println(util.BLUE +
-                // "====================================================");
-                // } catch (Exception e) {
-                // System.out.println(util.RED +
-                // "====================================================");
-                // System.out.println( " INPUT HAPUS CABANG GAGAL! ");
-                // System.out.println( "====================================================");
-                // util.delay(2000);
-                // util.clearConsole();
-                // sc.nextLine();
-                // }
-                // break;
-                case 5:
+                case 2:
                     Barber.TampilBarber(barberList);
                     break;
-                case 6:
+                case 3:
                     try {
                         System.out.print(util.GREEN + "Username Barber: " + util.YELLOW);
                         String userB = sc.nextLine();
@@ -452,7 +362,7 @@ public class Main {
                         sc.nextLine();
                     }
                     break;
-                case 7:
+                case 4:
                     Barber.TampilBarber(barberList);
                     int id = inputInteger(util.GREEN + "Masukkan ID Barber yang akan diupdate: " + util.YELLOW);
                     for (Barber b : barberList) {
@@ -471,7 +381,7 @@ public class Main {
                     System.out.println("              BARBER TIDAK DITEMUKAN!               ");
                     System.out.println("====================================================");
                     break;
-                case 8:
+                case 5:
                     try {
                         System.out.print(util.GREEN + "Username Barber: " + util.YELLOW);
                         String userDel = sc.nextLine();
@@ -488,7 +398,7 @@ public class Main {
                         sc.nextLine();
                     }
                     break;
-                case 9:
+                case 6:
                     a.logout();
                     return;
                 default:
@@ -518,51 +428,9 @@ public class Main {
 
             switch (pilih) {
                 case 1:
-                    // boolean adaReservasi = false;
-                    // for (Pelanggan p : pelangganList) {
-                    // for (Reservasi r : p.getReservasiList()) {
-                    // if (r.getBarber() != null &&
-                    // r.getBarber().getUsername().equals(b.getUsername())) {
-                    // r.detailReservasi();
-                    // adaReservasi = true;
-                    // }
-                    // }
-                    // }
-
-                    // if (!adaReservasi) {
-                    // System.out.println(util.RED +
-                    // "====================================================");
-                    // System.out.println(util.GREEN + " BELUM ADA RESERVASI ");
-                    // System.out.println(util.RED +
-                    // "====================================================");
-                    // }
-
-                    // int ResDone = inputInteger("Masukkan ID Reservasi : ");
-                    // // barberList.removeIf(r -> r.getIDReservasi().equals(ResDone));
-                    // b.selesaikanReservasi(ResDone);
-
-                    // util.delay(2000);
                     manajemenReservasi.getReservasiByBarber(b);
                     break;
                 case 2:
-                    // try {
-                    // System.out.print(util.GREEN + "ID Reservasi: " + util.YELLOW);
-                    // String ResDone = sc.nextLine();
-                    // barberList.removeIf(r -> p.ID_Reservasi().equals(ResDone));
-                    // System.out.println(util.BLUE +
-                    // "====================================================");
-                    // System.out.println(util.GREEN + " BARBER BERHASIL DIHAPUS! ");
-                    // System.out.println(util.BLUE +
-                    // "====================================================");
-                    // } catch (Exception e) {
-                    // System.out.println(util.RED +
-                    // "====================================================");
-                    // System.out.println( " INPUT HAPUS BARBER GAGAL! ");
-                    // System.out.println( "====================================================");
-                    // util.delay(2000);
-                    // util.clearConsole();
-                    // sc.nextLine();
-                    // }
                     int id = inputInteger(util.GREEN + "Masukkan ID Reservasi yang sudah selesai: " + util.YELLOW);
                     manajemenReservasi.selesaikanReservasiByBarber(b, id);
                     System.out.println(util.BLUE + "====================================================");
