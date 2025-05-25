@@ -23,4 +23,16 @@ public class Pelanggan extends User {
     public String getNoTelp() {
         return noTelp;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setNoTelp(String noTelp) {
+        this.noTelp = noTelp;
+    }
 }
