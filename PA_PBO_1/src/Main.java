@@ -158,6 +158,14 @@ public class Main {
                 }
             }
 
+            // Cek apakah username sudah terdaftar di admin
+            for (Admin a : adminList) {
+                if (a.getUsername().equals(user)) {
+                    usernameSudahAda = true;
+                    break;
+                }
+            }
+
             if (usernameSudahAda) {
                 System.out.println(util.RED + "====================================================");
                 System.out.println("           USERNAME SUDAH TERDAFTAR!              ");
@@ -223,6 +231,15 @@ public class Main {
 
             switch (pilih) {
                 case 1:
+                    if (barberList.isEmpty()) {
+                        System.out.println(util.RED + "====================================================");
+                        System.out.println("             TIDAK ADA BARBER TERSEDIA!             ");
+                        System.out.println("====================================================");
+                        util.delay(2000);
+                        util.clearConsole();
+                        continue;
+                    }
+
                     try {
                         Barber barberPilihan = null;
                         Paket paketPilihan = null;
@@ -231,45 +248,53 @@ public class Main {
                                 // Pilih barber
                                 System.out.println(util.BLUE + "--------------------------------------");
                                 System.out.printf(
-                                        util.BLUE + "| " + util.GREEN + "%-3s" + util.BLUE + " | " + util.GREEN + "%-10s"
+                                        util.BLUE + "| " + util.GREEN + "%-3s" + util.BLUE + " | " + util.GREEN
+                                                + "%-10s"
                                                 + util.BLUE + " | " + util.GREEN + "%-15s" + util.BLUE + " |\n",
                                         "No", "ID", "Username");
-    
+
                                 System.out.println(util.BLUE + "--------------------------------------");
-                                
+
                                 for (int i = 0; i < barberList.size(); i++) {
                                     Barber barber = barberList.get(i);
                                     System.out.printf(
-                                        util.BLUE + "| " + util.GREEN + "%-3d" + util.BLUE + " | " + util.GREEN
-                                        + "%-10s" + util.BLUE + " | " + util.GREEN + "%-15s" + util.BLUE
-                                        + " |\n",
-                                        (i + 1), barber.getIDBarber(), barber.getUsername());
-                                    }
-                                    
+                                            util.BLUE + "| " + util.GREEN + "%-3d" + util.BLUE + " | " + util.GREEN
+                                                    + "%-10s" + util.BLUE + " | " + util.GREEN + "%-15s" + util.BLUE
+                                                    + " |\n",
+                                            (i + 1), barber.getIDBarber(), barber.getUsername());
+                                }
+
                                 System.out.println(util.BLUE + "--------------------------------------");
                                 System.out
-                                        .print(util.GREEN + "\nPilih barber (1-" + barberList.size() + "): " + util.YELLOW);
+                                        .print(util.GREEN + "\nPilih barber (1-" + barberList.size() + "): "
+                                                + util.YELLOW);
                                 int pilihBarber = inputInteger(util.GREEN + "Pilih barber : " + util.YELLOW);
-    
+
                                 if (pilihBarber < 1 || pilihBarber > barberList.size()) {
-                                    System.out.println(util.RED + "====================================================");
+                                    System.out
+                                            .println(util.RED + "====================================================");
                                     System.out.println("           PILIHAN BARBER TIDAK VALID!              ");
                                     System.out.println("====================================================");
                                     continue;
                                 }
-    
+
                                 barberPilihan = barberList.get(pilihBarber - 1);
                                 break;
                             }
-    
+
                             // Pilih paket
                             while (true) {
-                                System.out.println(util.BLUE + "==========================================================================");
-                                System.out.println(util.GREEN + "                               PILIH PAKET                               ");
-                                System.out.println(util.BLUE + "==========================================================================");
+                                System.out.println(util.BLUE
+                                        + "==========================================================================");
+                                System.out.println(util.GREEN
+                                        + "                               PILIH PAKET                               ");
+                                System.out.println(util.BLUE
+                                        + "==========================================================================");
                                 System.out.printf(
-                                        util.BLUE + "| " + util.GREEN + "%-3s" + util.BLUE + " | " + util.GREEN + "%-10s"
-                                                + util.BLUE + " | " + util.GREEN + "%-15s" + util.BLUE + " | " + util.GREEN
+                                        util.BLUE + "| " + util.GREEN + "%-3s" + util.BLUE + " | " + util.GREEN
+                                                + "%-10s"
+                                                + util.BLUE + " | " + util.GREEN + "%-15s" + util.BLUE + " | "
+                                                + util.GREEN
                                                 + "%-20s"
                                                 + util.BLUE + " | " + util.GREEN + "%-10s" + util.BLUE + " |\n",
                                         "No", "ID", "Nama Paket", "Deskripsi", "Harga");
@@ -280,7 +305,8 @@ public class Main {
                                     Paket paket = paketList.get(i);
                                     System.out.printf(
                                             util.BLUE + "| " + util.GREEN + "%-3d" + util.BLUE + " | " + util.GREEN
-                                                    + "%-10s" + util.BLUE + " | " + util.GREEN + "%-15s" + util.BLUE + " | "
+                                                    + "%-10s" + util.BLUE + " | " + util.GREEN + "%-15s" + util.BLUE
+                                                    + " | "
                                                     + util.GREEN + "%-20s" + util.BLUE + " | " + util.GREEN + "Rp%-8d"
                                                     + util.BLUE + " |\n",
                                             (i + 1), paket.getIDPaket(), paket.getNama(), paket.getDesk(),
@@ -289,11 +315,13 @@ public class Main {
                                 System.out.println(
                                         util.BLUE
                                                 + "--------------------------------------------------------------------------");
-                                System.out.print(util.GREEN + "\nPilih paket (1-" + paketList.size() + "): " + util.YELLOW);
+                                System.out.print(
+                                        util.GREEN + "\nPilih paket (1-" + paketList.size() + "): " + util.YELLOW);
                                 int pilihPaket = sc.nextInt();
                                 sc.nextLine(); // untuk membersihkan buffer
                                 if (pilihPaket < 1 || pilihPaket > paketList.size()) {
-                                    System.out.println(util.RED + "====================================================");
+                                    System.out
+                                            .println(util.RED + "====================================================");
                                     System.out.println("           PILIHAN PAKET TIDAK VALID!              ");
                                     System.out.println("====================================================");
                                     continue;
@@ -301,28 +329,28 @@ public class Main {
                                 paketPilihan = paketList.get(pilihPaket - 1);
                                 break;
                             }
-    
+
                             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                             dateFormat.setLenient(false);
-    
+
                             Date tanggalWaktu = null;
-    
+
                             while (true) {
                                 try {
                                     // Input tanggal
                                     System.out.print(util.GREEN + "Tanggal (dd/MM/yyyy): " + util.YELLOW);
                                     String tanggal = sc.nextLine();
-    
+
                                     // Tampilkan daftar waktu yang tersedia
                                     System.out.println(util.BLUE + "====================");
-                                    System.out.println(util.GREEN +"    PILIH WAKTU     ");
+                                    System.out.println(util.GREEN + "    PILIH WAKTU     ");
                                     System.out.println(util.BLUE + "====================");
                                     System.out.printf(
                                             util.BLUE + "| " + util.GREEN + "%-3s" + util.BLUE + " | " + util.GREEN
                                                     + "%-10s" + util.BLUE + " |\n",
                                             "No", "Waktu");
                                     System.out.println(util.BLUE + "--------------------");
-    
+
                                     for (int i = 0; i < waktuList.size(); i++) {
                                         Waktu waktu = waktuList.get(i);
                                         System.out.printf(
@@ -330,40 +358,43 @@ public class Main {
                                                         + "%-10s" + util.BLUE + " |\n",
                                                 (i + 1), waktu.getWaktu());
                                     }
-    
+
                                     System.out.print(
                                             util.GREEN + "\nPilih waktu (1-" + waktuList.size() + "): " + util.YELLOW);
                                     int pilihWaktu = inputInteger("");
-    
+
                                     if (pilihWaktu < 1 || pilihWaktu > waktuList.size()) {
                                         System.out
-                                                .println(util.RED + "====================================================");
+                                                .println(util.RED
+                                                        + "====================================================");
                                         System.out.println("           PILIHAN WAKTU TIDAK VALID!              ");
                                         System.out.println("====================================================");
                                         continue;
                                     }
-    
+
                                     String waktu = waktuList.get(pilihWaktu - 1).getWaktu();
-    
+
                                     // Gabungkan & parse
                                     tanggalWaktu = dateFormat.parse(tanggal + " " + waktu);
                                     if (tanggalWaktu.before(new Date())) {
                                         System.out
-                                                .println(util.RED + "====================================================");
+                                                .println(util.RED
+                                                        + "====================================================");
                                         System.out.println("            TANGGAL/WAKTU TIDAK BOLEH LAMPAU        ");
                                         System.out.println("====================================================");
                                         continue;
                                     }
                                     break;
-    
+
                                 } catch (ParseException e) {
-                                    System.out.println(util.RED + "====================================================");
+                                    System.out
+                                            .println(util.RED + "====================================================");
                                     System.out.println("         FORMAT TANGGAL / WAKTU TIDAK VALID!        ");
                                     System.out.println("         Gunakan format dd/MM/yyyy dan HH:mm        ");
                                     System.out.println("====================================================");
                                 }
                             }
-                            
+
                             if (manajemenReservasi.isReservasiTaken(barberPilihan, tanggalWaktu).equals(true)) {
                                 System.out.println(util.RED + "====================================================");
                                 System.out.println("           BARBER SEDANG SIBUK PADA WAKTU INI!      ");
@@ -371,7 +402,7 @@ public class Main {
                                 util.delay(2000);
                                 util.clearConsole();
                                 continue;
-                            }else {
+                            } else {
                                 Reservasi reservasi = new Reservasi(tanggalWaktu, barberPilihan, p, paketPilihan);
                                 manajemenReservasi.tambahReservasi(reservasi);
                                 System.out.println(util.BLUE + "====================================================");
@@ -380,7 +411,7 @@ public class Main {
                             }
                             break;
                         }
-                        
+
                     } catch (Exception e) {
                         System.out.println(util.RED + "====================================================");
                         System.out.println("              INPUT RESERVASI GAGAL                 ");
@@ -390,7 +421,7 @@ public class Main {
                         sc.nextLine();
                     }
                     break;
-                        
+
                 case 2:
                     manajemenReservasi.getReservasiByPelanggan(p);
                     break;
@@ -423,6 +454,12 @@ public class Main {
                                     }
                                     for (Barber b : barberList) {
                                         if (b.getUsername().equals(usernameBaru)) {
+                                            usernameSudahAda = true;
+                                            break;
+                                        }
+                                    }
+                                    for (Admin a : adminList) {
+                                        if (a.getUsername().equals(usernameBaru)) {
                                             usernameSudahAda = true;
                                             break;
                                         }
@@ -551,6 +588,20 @@ public class Main {
                                 break;
                             }
                         }
+                        // Cek apakah username barber sudah ada di admin
+                        for (Admin ad : adminList) {
+                            if (ad.getUsername().equals(userB)) {
+                                usernameBarberSudahAda = true;
+                                break;
+                            }
+                        }
+                        // Cek apakah username barber sudah ada di pelanggan
+                        for (Pelanggan p : pelangganList) {
+                            if (p.getUsername().equals(userB)) {
+                                usernameBarberSudahAda = true;
+                                break;
+                            }
+                        }
 
                         if (usernameBarberSudahAda) {
                             System.out.println(util.RED + "====================================================");
@@ -638,8 +689,9 @@ public class Main {
                     ██████╔╝██║  ██║██║  ██║██████╔╝███████╗██║  ██║
                     ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝""");
             System.out.println(util.BLUE + "====================================================");
-            System.out.println(util.GREEN + "   [1] Lihat Reservasi Hari Ini");
-            System.out.println("   [2] Logout");
+            System.out.println(util.GREEN + "   [1] Lihat Reservasi");
+            System.out.println("   [2] Selesaikan reservasi");
+            System.out.println("   [3] Logout");
             System.out.println(util.BLUE + "====================================================");
             int pilih = inputInteger(util.GREEN + "Pilih Menu : " + util.YELLOW);
 
@@ -648,6 +700,7 @@ public class Main {
                     manajemenReservasi.getReservasiByBarber(b);
                     break;
                 case 2:
+                    manajemenReservasi.getReservasiByBarber(b);    
                     int id = inputInteger(util.GREEN + "Masukkan ID Reservasi yang sudah selesai: " + util.YELLOW);
                     manajemenReservasi.selesaikanReservasiByBarber(b, id);
                     System.out.println(util.BLUE + "====================================================");

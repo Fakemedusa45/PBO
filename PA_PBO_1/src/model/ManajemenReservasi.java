@@ -95,7 +95,7 @@ public class ManajemenReservasi implements ManajemenReservasiInterface {
             }
         }
         System.out.println(util.BLUE
-                + "+---------+-----------------+----------------+----------------------------------+-----------------+----------+----------------+");
+                + "+---------+----------------+----------------------------------+-----------------+----------+----------------+");
     }
 
     public void getReservasiByPelanggan(Pelanggan pelanggan) {
