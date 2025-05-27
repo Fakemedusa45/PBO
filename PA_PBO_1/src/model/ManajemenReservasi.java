@@ -20,7 +20,7 @@ public class ManajemenReservasi implements ManajemenReservasiInterface {
 
     public Boolean isReservasiTaken(Barber barber, Date waktuMulai) {
         for (Reservasi r : reservasiList) {
-            if (r.getBarber().equals(barber) && r.getWaktuMulai().equals(waktuMulai)) {
+            if (r.getBarber().equals(barber) && r.getWaktuMulai().equals(waktuMulai) && !r.isStatus()) {
                 return true; // Reservasi sudah ada
             }
         }
@@ -98,6 +98,15 @@ public class ManajemenReservasi implements ManajemenReservasiInterface {
                 + "+---------+----------------+----------------------------------+-----------------+----------+----------------+");
     }
 
+    public Boolean isReservasibyBarber(Barber barber) {
+        for (Reservasi r : reservasiList) {
+            if (r.getBarber().equals(barber) && !r.isStatus()) {
+                return true; // Ada reservasi yang belum selesai untuk barber ini
+            }
+        }
+        return false; // Tidak ada reservasi yang belum selesai untuk barber ini
+    }
+
     public void getReservasiByPelanggan(Pelanggan pelanggan) {
         System.out.println(util.BLUE
                 + "+---------+-----------------+----------------------------------+-----------------+----------+----------------+");
@@ -132,10 +141,13 @@ public class ManajemenReservasi implements ManajemenReservasiInterface {
         for (Reservasi r : reservasiList) {
             if (r.getBarber().equals(barber) && r.getIDReservasi() == id) {
                 r.setStatus(true);
-                System.out.println("Reservasi ID " + id + " telah diselesaikan oleh Barber " + barber.getUsername());
+                System.out.println(
+                        util.GREEN + "Reservasi ID " + id + " telah diselesaikan oleh Barber " + barber.getUsername());
                 return;
             }
         }
         System.out.println("Reservasi tidak ditemukan atau tidak sesuai dengan Barber.");
     }
+
+    
 }

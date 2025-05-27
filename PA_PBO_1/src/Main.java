@@ -18,9 +18,9 @@ public class Main {
         adminList.add(new Admin("admin", "admin"));
 
         // Data default barber (3 data)
-        barberList.add(new Barber("Ghazali", "123"));
-        barberList.add(new Barber("Vicky", "123"));
-        barberList.add(new Barber("Adi", "123"));
+        barberList.add(new Barber("Ghazali", "12345"));
+        barberList.add(new Barber("Vicky", "12345"));
+        barberList.add(new Barber("Adi", "12345"));
 
         paketList.add(new Paket("Cukur Reguler", "cukur A", 25000));
         paketList.add(new Paket("Cukur Premium", "cukur B", 45000));
@@ -141,6 +141,25 @@ public class Main {
             System.out.print(util.GREEN + "Username: " + util.YELLOW);
             String user = sc.nextLine();
 
+            // Validasi username minimal 5 karakter dan hanya huruf dan angka
+            if (user.length() < 5) {
+                System.out.println(util.RED + "====================================================");
+                System.out.println("      USERNAME MINIMAL 5 KARAKTER!                  ");
+                System.out.println("====================================================");
+                util.delay(2000);
+                util.clearConsole();
+                return;
+            }
+
+            if (!user.matches("^[a-zA-Z0-9]+$")) {
+                System.out.println(util.RED + "====================================================");
+                System.out.println("    USERNAME HANYA BOLEH HURUF DAN ANGKA!          ");
+                System.out.println("====================================================");
+                util.delay(2000);
+                util.clearConsole();
+                return;
+            }
+
             // Cek apakah username sudah terdaftar di pelanggan
             boolean usernameSudahAda = false;
             for (Pelanggan p : pelangganList) {
@@ -178,12 +197,44 @@ public class Main {
             System.out.print(util.GREEN + "Password: " + util.YELLOW);
             String pass = sc.nextLine();
 
+            // Validasi password minimal 5 karakter
+            if (pass.length() < 5) {
+                System.out.println(util.RED + "====================================================");
+                System.out.println("      PASSWORD MINIMAL 5 KARAKTER!                  ");
+                System.out.println("====================================================");
+                util.delay(2000);
+                util.clearConsole();
+                return;
+            }
+            if (!pass.matches("^[a-zA-Z0-9]+$")) {
+                System.out.println(util.RED + "====================================================");
+                System.out.println("    PASSWORD HANYA BOLEH HURUF DAN ANGKA!          ");
+                System.out.println("====================================================");
+                util.delay(2000);
+                util.clearConsole();
+                return;
+            }
+
             // Validasi nomor telepon
             String telp;
             boolean validTelp = false;
             do {
                 System.out.print(util.GREEN + "No Telp: " + util.YELLOW);
                 telp = sc.nextLine();
+
+                // Cek apakah no hp sepanjang 12 karakter (minimal) dan maksimal 15 karakter
+                if (telp.length() < 12) {
+                    System.out.println(util.RED + "====================================================");
+                    System.out.println("      NOMOR TELEPON MINIMAL 12 KARAKTER!            ");
+                    System.out.println("====================================================");
+                    continue;
+                } else if (telp.length() > 15) {
+                    System.out.println(util.RED + "====================================================");
+                    System.out.println("      NOMOR TELEPON MAKSIMAL 15 KARAKTER!            ");
+                    System.out.println("====================================================");
+                    continue;
+                }
+
                 if (telp.matches("\\d+")) {
                     validTelp = true;
                 } else {
@@ -443,6 +494,27 @@ public class Main {
                                 System.out.print(util.GREEN + "Username Baru: " + util.YELLOW);
                                 String usernameBaru = sc.nextLine();
 
+                                // Validasi username minimal 5 karakter dan hanya huruf dan angka
+                                if (usernameBaru.length() < 5) {
+                                    System.out
+                                            .println(util.RED + "====================================================");
+                                    System.out.println("      USERNAME MINIMAL 5 KARAKTER!                  ");
+                                    System.out.println("====================================================");
+                                    util.delay(2000);
+                                    util.clearConsole();
+                                    return;
+                                }
+
+                                if (!usernameBaru.matches("^[a-zA-Z0-9]+$")) {
+                                    System.out
+                                            .println(util.RED + "====================================================");
+                                    System.out.println("    USERNAME HANYA BOLEH HURUF DAN ANGKA!          ");
+                                    System.out.println("====================================================");
+                                    util.delay(2000);
+                                    util.clearConsole();
+                                    return;
+                                }
+
                                 // Cek apakah username baru sudah ada
                                 boolean usernameSudahAda = false;
                                 if (!usernameBaru.equals(p.getUsername())) {
@@ -485,6 +557,27 @@ public class Main {
                             case 2: // Update Password
                                 System.out.print(util.GREEN + "Password Baru: " + util.YELLOW);
                                 String passwordBaru = sc.nextLine();
+
+                                // Validasi password minimal 5 karakter
+                                if (passwordBaru.length() < 5) {
+                                    System.out
+                                            .println(util.RED + "====================================================");
+                                    System.out.println("      PASSWORD MINIMAL 5 KARAKTER!                  ");
+                                    System.out.println("====================================================");
+                                    util.delay(2000);
+                                    util.clearConsole();
+                                    return;
+                                }
+                                if (!passwordBaru.matches("^[a-zA-Z0-9]+$")) {
+                                    System.out
+                                            .println(util.RED + "====================================================");
+                                    System.out.println("    PASSWORD HANYA BOLEH HURUF DAN ANGKA!          ");
+                                    System.out.println("====================================================");
+                                    util.delay(2000);
+                                    util.clearConsole();
+                                    return;
+                                }
+
                                 p.setPassword(passwordBaru);
                                 System.out.println(util.BLUE + "====================================================");
                                 System.out.println(util.GREEN + "           PASSWORD BERHASIL DIUPDATE!             ");
@@ -497,6 +590,21 @@ public class Main {
                                 do {
                                     System.out.print(util.GREEN + "No Telp Baru: " + util.YELLOW);
                                     telpBaru = sc.nextLine();
+
+                                    // Cek apakah no hp sepanjang 12 karakter (minimal) dan maksimal 15 karakter
+                                    if (telpBaru.length() < 12) {
+                                        System.out.println(
+                                                util.RED + "====================================================");
+                                        System.out.println("      NOMOR TELEPON MINIMAL 12 KARAKTER!            ");
+                                        System.out.println("====================================================");
+                                        continue;
+                                    } else if (telpBaru.length() > 15) {
+                                        System.out.println(
+                                                util.RED + "====================================================");
+                                        System.out.println("      NOMOR TELEPON MAKSIMAL 15 KARAKTER!            ");
+                                        System.out.println("====================================================");
+                                        continue;
+                                    }
                                     if (telpBaru.matches("\\d+")) {
                                         validTelp = true;
                                     } else {
@@ -637,7 +745,61 @@ public class Main {
                             System.out.print(util.GREEN + "Username Baru Barber: " + util.YELLOW);
                             String namaBaru = sc.nextLine();
 
-                            b.setNamaBarber(namaBaru);
+                            // Validasi username minimal 5 karakter dan hanya huruf dan angka
+                            if (namaBaru.length() < 5) {
+                                System.out.println(util.RED + "====================================================");
+                                System.out.println("      USERNAME MINIMAL 5 KARAKTER!                  ");
+                                System.out.println("====================================================");
+                                util.delay(2000);
+                                util.clearConsole();
+                                return;
+                            }
+
+                            if (!namaBaru.matches("^[a-zA-Z0-9]+$")) {
+                                System.out.println(util.RED + "====================================================");
+                                System.out.println("    USERNAME HANYA BOLEH HURUF DAN ANGKA!          ");
+                                System.out.println("====================================================");
+                                util.delay(2000);
+                                util.clearConsole();
+                                return;
+                            }
+
+                            // Cek apakah username baru sudah ada
+                            boolean usernameSudahAda = false;
+                            for (Pelanggan pl : pelangganList) {
+                                if (pl.getUsername().equals(namaBaru)) {
+                                    usernameSudahAda = true;
+                                    break;
+                                }
+                            }
+                            for (Barber barber : barberList) {
+                                if (barber.getUsername().equals(namaBaru)) {
+                                    usernameSudahAda = true;
+                                    break;
+                                }
+                            }
+                            for (Admin admin : adminList) {
+                                if (admin.getUsername().equals(namaBaru)) {
+                                    usernameSudahAda = true;
+                                    break;
+                                }
+                            }
+
+                            if (usernameSudahAda) {
+                                System.out
+                                        .println(util.RED + "====================================================");
+                                System.out.println("           USERNAME SUDAH TERDAFTAR!              ");
+                                System.out.println("====================================================");
+                            } else {
+                                b.setNamaBarber(namaBaru);
+                                System.out.println(
+                                        util.BLUE + "====================================================");
+                                System.out.println(
+                                        util.GREEN + "           USERNAME BERHASIL DIUPDATE!             ");
+                                System.out.println(
+                                        util.BLUE + "====================================================");
+                            }
+
                             System.out.println(util.BLUE + "====================================================");
                             System.out.println(util.GREEN + "             BARBER BERHASIL DIUPDATE!              ");
                             System.out.println(util.BLUE + "====================================================");
@@ -650,9 +812,9 @@ public class Main {
                     break;
                 case 5:
                     try {
-                        System.out.print(util.GREEN + "Username Barber: " + util.YELLOW);
-                        String userDel = sc.nextLine();
-                        barberList.removeIf(b -> b.getUsername().equals(userDel));
+                        Barber.TampilBarber(barberList);
+                        int userDel = inputInteger(util.GREEN + "ID Barber yang akan dihapus: " + util.YELLOW);
+                        barberList.removeIf(b -> b.getIDBarber() == userDel);
                         System.out.println(util.BLUE + "====================================================");
                         System.out.println(util.GREEN + "             BARBER BERHASIL DIHAPUS!               ");
                         System.out.println(util.BLUE + "====================================================");
@@ -700,8 +862,16 @@ public class Main {
                     manajemenReservasi.getReservasiByBarber(b);
                     break;
                 case 2:
-                    manajemenReservasi.getReservasiByBarber(b);    
+                    if (manajemenReservasi.isReservasibyBarber(b) == false) {
+                        System.out.println(util.RED + "====================================================");
+                        System.out.println("          TIDAK ADA RESERVASI SAAT INI!              ");
+                        System.out.println("====================================================");
+                        util.delay(2000);
+                        break;
+                    }
+                    manajemenReservasi.getReservasiByBarber(b);
                     int id = inputInteger(util.GREEN + "Masukkan ID Reservasi yang sudah selesai: " + util.YELLOW);
+
                     manajemenReservasi.selesaikanReservasiByBarber(b, id);
                     System.out.println(util.BLUE + "====================================================");
                     System.out.println(util.GREEN + "             RESERVASI SELESAI!                    ");
